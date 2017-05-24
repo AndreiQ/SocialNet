@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.andrei.SocialNet.LoginActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <RelativeLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/textLoginFailed"
+            android:layout_width="238dp"
+            android:layout_height="79dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:text="@string/error_login_failed"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="96dp"
+            tools:layout_editor_absoluteY="381dp" />
+
+        <TextView
+            android:id="@+id/or"
+            android:layout_width="45dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="14dp"
+            android:text="@string/or_text"
+            tools:layout_editor_absoluteX="179dp"
+            tools:layout_editor_absoluteY="275dp"
+            android:layout_above="@+id/registerButton"
+            android:layout_alignEnd="@+id/registerButton" />
+
+        <Button
+            android:id="@+id/registerButton"
+            style="@android:style/Widget.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textLoginFailed"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:text="@string/action_register"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="312dp" />
+
+        <EditText
+            android:id="@+id/passwordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/loginButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="26dp"
+            android:ems="10"
+            android:hint="@string/prompt_password"
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="139dp" />
+
+        <EditText
+            android:id="@+id/emailText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/passwordText"
+            android:layout_alignStart="@+id/passwordText"
+            android:layout_marginBottom="39dp"
+            android:ems="10"
+            android:hint="@string/prompt_email"
+            android:inputType="textEmailAddress"
+            tools:layout_editor_absoluteX="83dp"
+            tools:layout_editor_absoluteY="61dp" />
+
+        <Button
+            android:id="@+id/loginButton"
+            style="@android:style/Widget.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/or"
+            android:layout_alignStart="@+id/registerButton"
+            android:layout_marginBottom="19dp"
+            android:elevation="0dp"
+            android:text="@string/action_sign_in"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="219dp" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

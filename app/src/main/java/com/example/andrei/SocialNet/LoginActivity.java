@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
+import siteLocal.AbstractData;
 import siteLocal.AbstractPostHandler;
 import siteLocal.IData;
 import siteLocal.User;
@@ -16,40 +19,50 @@ import siteLocal.User;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG_LoginActivity = "LoginActivity";
+
     private TextView mEmailView;
     private TextView mPasswordView;
-    private Button loginButton;
-    private String email;
-    private String password;
-    private Button registerButton;
     private TextView loginError;
-    private User AttemptResult;
-    private  boolean waitingForServerResponse = true;
+    private User AttemptResult = new User();
 
-    private View.OnClickListener loginListener = new View.OnClickListener() {
+    private Button.OnClickListener loginListener = new Button.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (attemptLogin())
-                {
-                    loginError.setVisibility(loginError.INVISIBLE);
+           String email = mEmailView.getText().toString();
+           String password = mPasswordView.getText().toString();
 
-                    Intent goToMainActivity = new Intent(LoginActivity.this, MainActivity.class);
-                  //  goToMainActivity.putExtra("user",  AttemptResult);
-                    startActivity(goToMainActivity);
-                }
-             else
-
+            if(email.isEmpty() || password.isEmpty()) {
                 loginError.setVisibility(loginError.VISIBLE);
+                return;
+            }
+
+            UserLoginTask mAuthTask = new UserLoginTask(email, password);
+            try {
+                AttemptResult = (User)mAuthTask.execute((Void)null).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            if (AttemptResult.getEmail() == null)
+                {
+                    loginError.setVisibility(loginError.VISIBLE);
+                }
+             else{
+                loginError.setVisibility(loginError.INVISIBLE);
+                Intent goToMainActivity = new Intent(LoginActivity.this, MainActivity.class);
+                goToMainActivity.putExtra("userAsString",AttemptResult.toString());
+                startActivity(goToMainActivity);
+            }
         }
     };
 
-    private View.OnClickListener registerListener = new View.OnClickListener() {
+    private Button.OnClickListener registerListener = new Button.OnClickListener() {
         @Override
         public void onClick(View view) {
-
             Intent goToRegisterActivity = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(goToRegisterActivity);
-
         }
     };
 
@@ -63,27 +76,13 @@ public class LoginActivity extends AppCompatActivity {
 
         loginError = (TextView) findViewById(R.id.textLoginFailed);
 
-        registerButton = (Button) findViewById(R.id.registerButton);
+        Button registerButton = (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(registerListener);
 
-        loginButton = (Button) findViewById(R.id.loginButton);
+        Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginListener);
     }
 
-    public boolean attemptLogin() {
-
-        email = mEmailView.getText().toString();
-        password = mPasswordView.getText().toString();
-
-        UserLoginTask mAuthTask = new UserLoginTask(email, password);
-        mAuthTask.execute((Void)null);
-
-
-        if(AttemptResult != null)
-                return true;
-            else
-                return false;
-    }
 
     public class UserLoginTask extends AbstractPostHandler {
        UserLoginTask(String email, String password) {
@@ -94,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected IData getModelInstance() {
+        protected AbstractData getModelInstance() {
             return new User();
         }
 
@@ -103,14 +102,11 @@ public class LoginActivity extends AppCompatActivity {
             return "/User/Login.php";
         }
 
+
         @Override
-        protected void onPostExecute(IData result) {
-
+        protected void onPostExecute(AbstractData result) {
             LoginActivity.this.setLoginAttemptResult((User)result);
-            Log.d(TAG_LoginActivity," aici: " + result.toString());
-            waitingForServerResponse = false;
         }
-
     }
 
     private void setLoginAttemptResult(User result) {

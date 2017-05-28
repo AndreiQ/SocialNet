@@ -1,5 +1,7 @@
 package siteLocal;
 import android.os.AsyncTask;
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -10,20 +12,22 @@ import java.util.Map;
  * Created by Andrei on 5/24/2017.
  */
 
-public abstract class AbstractPostHandler extends AsyncTask<Void, Void, IData> {
+public abstract class AbstractPostHandler extends AsyncTask<Void, Void, AbstractData> {
 
+    private static final String TAG_AbstractPostHandler = "AbstractPostHandler";
     protected Map<String,String> arguments;
-    protected final String serverName = "http://mobileapp3s.890m.com/Public";
-    protected abstract IData getModelInstance();
+    private final String serverName = "http://mobileapp3s.890m.com/Public";
+    protected abstract AbstractData getModelInstance();
     protected abstract String getServerResources();
-    protected abstract void onPostExecute(IData result);
+    protected abstract void onPostExecute(AbstractData result);
 
     protected AbstractPostHandler()
     {
         arguments = new HashMap<>();
     }
     @Override
-    protected IData doInBackground(Void... params)   {
+    protected AbstractData doInBackground(Void... params)   {
+
         try {
             HttpUtility.sendPostRequest(serverName + getServerResources(),arguments);
         } catch (IOException e) {
@@ -37,7 +41,7 @@ public abstract class AbstractPostHandler extends AsyncTask<Void, Void, IData> {
         }
         HttpUtility.disconnect();
 
-        IData model = getModelInstance();
+        AbstractData model = getModelInstance();
         JSONObject messageResponse = null;
         try {
              messageResponse = new JSONObject(data);
@@ -60,7 +64,10 @@ public abstract class AbstractPostHandler extends AsyncTask<Void, Void, IData> {
             }
         }
 
+        Log.d(TAG_AbstractPostHandler," in abstractPostHandler userAsjson: "+userAsJson );
         model.decode(userAsJson);
+
+        Log.d(TAG_AbstractPostHandler," in abstractPostHandler model: "+ model.toString());
 
         return model;
     }

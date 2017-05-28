@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import siteLocal.AbstractData;
 import siteLocal.AbstractPostHandler;
 import siteLocal.IData;
 import siteLocal.User;
@@ -83,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         @Override
-        protected IData getModelInstance() {
+        protected AbstractData getModelInstance() {
             return new User();
         }
 
@@ -92,8 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
             return "/User/Register.php";
         }
 
+
         @Override
-        protected void onPostExecute(IData result) {
+        protected void onPostExecute(AbstractData result) {
 
             Log.d(TAG_RegisterActivity," aici register: " + result.toString());
             RegisterActivity.this.setUserFromServer(result);

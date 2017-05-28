@@ -5,9 +5,36 @@
     tools:context="com.example.andrei.SocialNet.MessagesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="messages fragment" />
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/list"
+            android:ems="10"
+            android:hint="Write message"
+            android:inputType="textPersonName"
+            android:layout_toStartOf="@+id/send_button" />
+
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/list"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/messages_sendButton" />
+    </RelativeLayout>
 
 </FrameLayout>

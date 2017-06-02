@@ -32,4 +32,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="messages_sendButton">Send</string>
     <string name="user_chat">Chat</string>
+    <string name="profile_addFriendButtton">Add friend</string>
+    <string name="profile_isFriend">Friends</string>
 </resources>

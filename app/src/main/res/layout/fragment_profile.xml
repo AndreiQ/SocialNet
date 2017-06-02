@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,10 +12,50 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/profile"
+            android:id="@+id/profile_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="profile frag" />
+            android:layout_height="40dp"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:text="Name"
+            android:textAlignment="center" />
+
+        <SearchView
+            android:id="@+id/profile_searchFriendsView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+             />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/profile_searchFriendsView"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@android:drawable/btn_dialog" />
+
+        <Button
+            android:id="@+id/profile_addFriendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/profile_name"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/profile_addFriendButtton" />
+
+        <TextView
+            android:id="@+id/profile_isFriendText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/profile_addFriendButton"
+            android:layout_marginEnd="33dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/profile_isFriend" />
+
     </RelativeLayout>
 
 </FrameLayout>

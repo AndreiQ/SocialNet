@@ -2,7 +2,6 @@ package com.example.andrei.SocialNet;
 
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +29,8 @@ public class ProfileFragment extends Fragment {
         Bundle b = getActivity().getIntent().getExtras();
 
         String userAsString = b.getString("userAsString");
-        mUserView = (TextView) view.findViewById(R.id.profile);
-    mUserView.setText(userAsString);
+       //mUserView = (TextView) view.findViewById(R.id.profile);
+  //  mUserView.setText(userAsString);
 
         return view;
     }

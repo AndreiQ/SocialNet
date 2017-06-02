@@ -83,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(loginListener);
     }
 
-
     public class UserLoginTask extends AbstractPostHandler {
        UserLoginTask(String email, String password) {
             super();

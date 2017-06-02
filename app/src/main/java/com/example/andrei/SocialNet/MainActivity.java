@@ -48,7 +48,13 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+        }
+    }
 
 
     @Override
@@ -59,13 +65,11 @@ public class MainActivity extends AppCompatActivity {
         Bundle dataFromLoginActivity = getIntent().getExtras();
         String userAsString = dataFromLoginActivity.getString("userAsString");
 
-
 /*
         Bundle dataFromRegisterActivity = getIntent().getExtras();
         String data = dataFromRegisterActivity.getString("data");
         mTextMessage.setText(data);
 */
-
         fragmentManager = getFragmentManager();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
